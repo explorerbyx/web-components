@@ -1,6 +1,5 @@
 var SsoSuSocialButton_1;
 import { __decorate } from "https://cdn.skypack.dev/tslib";
-/* eslint-disable prefer-template */
 import { html, css, LitElement, property, customElement } from "https://cdn.skypack.dev/lit-element";
 const API_URL = 'https://sso.universia.net/auth/realms/SantanderX/protocol/openid-connect/auth';
 const SUPPORTED_LOCALES = ['es', 'en', 'pt'];
@@ -22,30 +21,16 @@ const DEFAULT_BUTTON_LITERALS = {
 let SsoSuSocialButton = SsoSuSocialButton_1 = class SsoSuSocialButton extends LitElement {
     constructor() {
         super(...arguments);
-        /**
-         * Client Id to identify the Realm
-         */
         this.clientId = undefined;
-        /**
-         * Optional User State to identify users actual app status
-         */
         this.state = undefined;
-        /**
-         * Locale language of the user
-         */
         this.locale = DEFAULT_LOCALE;
-        /**
-         * Redirect URL to access after a successful signin
-         */
         this.redirectUri = undefined;
     }
-    // Set default value in locale if not given
     _localeLiterals() {
         if (SUPPORTED_LOCALES.indexOf(String(this.locale)) < 0) {
             this.locale = DEFAULT_LOCALE;
         }
     }
-    // Get SSO url
     _getSsoUrl() {
         let sUrl = '#';
         const nonce = SsoSuSocialButton_1._getRandomString(20, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
@@ -168,4 +153,3 @@ SsoSuSocialButton = SsoSuSocialButton_1 = __decorate([
     customElement('sso-su-social-button')
 ], SsoSuSocialButton);
 export { SsoSuSocialButton };
-//# sourceMappingURL=sso-su-social-button.js.map
