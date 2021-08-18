@@ -2,7 +2,7 @@ var SsoSuSocialButton_1;
 import { __decorate } from "https://cdn.skypack.dev/tslib";
 /* eslint-disable prefer-template */
 import { html, css, LitElement, property, customElement } from "https://cdn.skypack.dev/lit-element";
-const API_URL = 'https://sso.universia.net/auth/realms/';
+const API_URL = 'https://sso.universia.net/auth/realms/SantanderX/protocol/openid-connect/auth';
 const SUPPORTED_LOCALES = ['es', 'en', 'pt'];
 const DEFAULT_LOCALE = 'es';
 const DEFAULT_BUTTON_LITERALS = {
@@ -52,8 +52,7 @@ let SsoSuSocialButton = SsoSuSocialButton_1 = class SsoSuSocialButton extends Li
         if (this.clientId && this.redirectUri) {
             sUrl =
                 API_URL +
-                    this.clientId +
-                    '/protocol/openid-connect/auth?scope=email%20profile%20openid&response_type=id_token' +
+                    '?scope=email%20profile%20openid&response_type=id_token' +
                     '&client_id=' +
                     this.clientId +
                     '&ui_locales=' +
