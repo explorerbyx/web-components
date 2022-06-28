@@ -4,7 +4,8 @@ import { query, query as query$1, property, property as property$1, customElemen
 import { map } from "https://cdn.skypack.dev/lit/directives/map.js";
 import { ifDefined } from "https://cdn.skypack.dev/lit/directives/if-defined.js";
 import { classMap } from "https://cdn.skypack.dev/lit/directives/class-map.js";
-import { directive, PropertyPart } from "https://cdn.skypack.dev/lit/directive.js";
+import { directive } from "https://cdn.skypack.dev/lit/directive.js";
+import { PropertyPart } from "https://cdn.skypack.dev/lit/directive.js";
 var axios$2 = { exports: {} };
 var bind$2 = function bind(fn, thisArg) {
   return function wrap() {
