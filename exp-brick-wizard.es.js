@@ -4349,7 +4349,7 @@ let ExpBrickWizard = class extends LitElement$1 {
     };
   }
   async loadFontFromURL() {
-    import("./webfontloader.js").then(function(n) {
+    import("https://cdn.jsdelivr.net/gh/explorerbyx/web-components@latest/webfontloader.js").then(function(n) {
       return n.w;
     }).then((WebFontLoader) => {
       WebFontLoader.load({
