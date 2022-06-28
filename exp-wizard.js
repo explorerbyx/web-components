@@ -665,7 +665,6 @@ let ExpWizard = class ExpWizard extends LitElement {
             .catch((error) => {
             return Promise.reject(error);
         });
-        console.log(JSON.stringify(response || "{}"));
         if (response.idea) {
             this.setIdeaText(response.idea);
             this.setLogos(response.logos || []);
