@@ -1,10 +1,10 @@
-import { unsafeCSS, LitElement as LitElement$1, html as html$1 } from "lit";
-import { query as query$1, property as property$1, customElement as customElement$1 } from "lit/decorators.js";
-import { map } from "lit/directives/map.js";
-import { ifDefined } from "lit-html/directives/if-defined";
-import { css, query, property, html, customElement, LitElement, svg as svg$1 } from "lit-element";
-import { classMap } from "lit-html/directives/class-map";
-import { directive, PropertyPart, svg } from "lit-html";
+import { LitElement, LitElement as LitElement$1, html, html as html$1 } from "https://cdn.skypack.dev/lit";
+import { unsafeCSS, css, svg, svg as svg$1 } from "https://cdn.skypack.dev/lit";
+import { query, query as query$1, property, property as property$1, customElement, customElement as customElement$1 } from "https://cdn.skypack.dev/lit/decorators.js";
+import { map } from "https://cdn.skypack.dev/lit/directives/map.js";
+import { ifDefined } from "https://cdn.skypack.dev/lit/directives/if-defined.js";
+import { classMap } from "https://cdn.skypack.dev/lit/directives/class-map.js";
+import { directive, PropertyPart } from "https://cdn.skypack.dev/lit/directive.js";
 var axios$2 = { exports: {} };
 var bind$2 = function bind(fn, thisArg) {
   return function wrap() {
@@ -4349,7 +4349,7 @@ let ExpBrickWizard = class extends LitElement$1 {
     };
   }
   async loadFontFromURL() {
-    import("https://cdn.jsdelivr.net/gh/explorerbyx/web-components@latest/webfontloader.js").then(function(n) {
+    import("https://cdn.jsdelivr.net/gh/explorerbyx/web-components@latest/webfontloader.min.js").then(function(n) {
       return n.w;
     }).then((WebFontLoader) => {
       WebFontLoader.load({
