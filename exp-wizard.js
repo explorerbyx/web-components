@@ -12,22 +12,8 @@ import 'https://1.www.s81c.com/common/carbon/web-components/tag/latest/select.mi
 import 'https://1.www.s81c.com/common/carbon/web-components/tag/latest/button.min.js';
 import 'https://1.www.s81c.com/common/carbon/web-components/tag/latest/form.min.js';
 import 'https://1.www.s81c.com/common/carbon/web-components/tag/latest/tile.min.js';
-/*
-// Icons
-import { getAttributes, toSVG } from '@carbon/icon-helpers';
-import ideaIcon from '@carbon/icons/es/idea/20';
+import 'https://1.www.s81c.com/common/carbon/web-components/tag/latest/loading.min.js';
 
-const addIconNode = toSVG({
-  ...ideaIcon,
-  attrs: getAttributes(ideaIcon.attrs),
-});
-*/
-/**
- * An example element.
- *
- * @slot - This element has a slot
- * @csspart button - The button
- */
 let ExpWizard = class ExpWizard extends LitElement {
     constructor() {
         super(...arguments);
@@ -183,17 +169,20 @@ let ExpWizard = class ExpWizard extends LitElement {
             es: {
                 btnPost: 'Explorar',
                 btnRefresh: 'Limpiar',
-                ideaHeader: '',
+                ideaHeader: '¿Qué te parece?',
+                logoHeader: 'Elige un nombre y un logo (Botón derecho + Guardar imagen como...)'
             },
             en: {
                 btnPost: 'Explore',
                 btnRefresh: 'Refresh',
-                ideaHeader: '',
+                ideaHeader: 'Does this idea fit you?',
+                logoHeader: 'Select a name and logo (Right Click + Save Image As...)'
             },
             'pt-pt': {
                 btnPost: 'Explorar',
                 btnRefresh: 'Limpiar',
-                ideaHeader: '',
+                ideaHeader: 'O que você acha?',
+                logoHeader: 'Escolha um nome e logotipo (Clique com o botão direito + Salvar imagem como...)'
             },
         };
         //
@@ -248,7 +237,7 @@ let ExpWizard = class ExpWizard extends LitElement {
         //
         this._countries = {
             es: {
-                title: '¿Donde resides?',
+                title: '¿Dónde vives?',
                 arial: 'País de residencia',
                 holder: 'Selecciona un país',
                 validity: 'Tienes que seleccionar uno',
@@ -301,7 +290,7 @@ let ExpWizard = class ExpWizard extends LitElement {
         //
         this._sectors = {
             es: {
-                title: '¿En que indústria te gustaría trabajar?',
+                title: '¿A qué te quieres dedicar?',
                 arial: 'Sector',
                 holder: 'Selecciona una industria',
                 validity: 'Tienes que seleccionar una',
@@ -330,7 +319,7 @@ let ExpWizard = class ExpWizard extends LitElement {
                 ],
             },
             en: {
-                title: 'In which industry would you like to work?',
+                title: 'What would you like to work at?',
                 arial: 'Industryr',
                 holder: 'Select an industry',
                 validity: 'You must choose one',
@@ -359,7 +348,7 @@ let ExpWizard = class ExpWizard extends LitElement {
                 ],
             },
             'pt-pt': {
-                title: 'Em qual setor você gostaria de trabalhar?',
+                title: 'A que você quer se dedicar?',
                 arial: 'Setor',
                 holder: 'Selecione um setor',
                 validity: 'Você tem que selecionar um',
@@ -393,7 +382,7 @@ let ExpWizard = class ExpWizard extends LitElement {
         //
         this._ods = {
             es: {
-                title: '¿Qué ODS 2030 de la ONU te gustaría afrontar?',
+                title: '¿Cómo te gustaría salvar el mundo?',
                 arial: 'ODS',
                 holder: 'Selecciona un ODS',
                 validity: 'Tienes que seleccionar uno',
@@ -418,9 +407,9 @@ let ExpWizard = class ExpWizard extends LitElement {
                 ],
             },
             en: {
-                title: 'Which UN SDG 2030 do you consider the most important?',
+                title: 'How would you like to save the world?',
                 arial: 'SDG',
-                holder: 'Select a SDG',
+                holder: 'Select a SDG 2030',
                 validity: 'You must choose one',
                 values: [
                     { value: '01', name: 'No poverty' },
@@ -443,7 +432,7 @@ let ExpWizard = class ExpWizard extends LitElement {
                 ],
             },
             'pt-pt': {
-                title: 'Qual ODS 2030 da ONU você gostaria de abordar?',
+                title: 'Como você gostaria de salvar o mundo?',
                 arial: 'ODS',
                 holder: 'Selecione um ODS',
                 validity: 'Você tem que selecionar um',
@@ -500,7 +489,6 @@ let ExpWizard = class ExpWizard extends LitElement {
         }
         let r = parseInt(hex.slice(0, 2), 16), g = parseInt(hex.slice(2, 4), 16), b = parseInt(hex.slice(4, 6), 16);
         if (bw) {
-            // https://stackoverflow.com/a/3943023/112731
             return r * 0.299 + g * 0.587 + b * 0.114 > 186 ? '#000000' : '#FFFFFF';
         }
         // invert color components
@@ -590,7 +578,7 @@ let ExpWizard = class ExpWizard extends LitElement {
         </div>
       </bx-form-item>
       <div class="cds--grid cds--type-sans">
-        <div class="cds--row exp-questions-margins">
+        <div class="cds--row">
           <div id="ideaText" class="cds--col-auto exp-text-center">
           </div>
         </div>
@@ -608,7 +596,7 @@ let ExpWizard = class ExpWizard extends LitElement {
             : input.setAttribute('invalid', 'true');
     }
     async _submitForm() {
-        this.setIdeaText();
+        this.setIdeaText("loading");
         this.setLogos([]);
         const studies = this._selectedStudies.value;
         studies
@@ -626,16 +614,14 @@ let ExpWizard = class ExpWizard extends LitElement {
         ods
             ? this._selectedODS.removeAttribute('invalid')
             : this._selectedODS.setAttribute('invalid', 'true');
-        if (!studies || !country || !sector || !ods)
+        if (!studies || !country || !sector || !ods) {
+            this.setIdeaText("clear");
             return;
+        }
         const odsKeys = String(this._variables.keywords.ODS[ods][Math.floor(Math.random() * this._variables.keywords.ODS[ods].length)] || '').toLocaleLowerCase('en');
         const iconKey = String(this._variables.keywords.ICONS[ods][Math.floor(Math.random() * this._variables.keywords.ICONS[ods].length)] || '').toLocaleLowerCase('en');
         const sMethod = "POST";
-        const apiUrl = 'https://' +
-            (window.location.host === 'localhost:8000'
-                ? 'apps.explorerbyx.org'
-                : window.location.host) +
-            '/api/exec-task';
+        const apiUrl = 'https://apps.explorerbyx.org/api/exec-task'; // window.location.host
         const qParams = '?action=new&target=custom&object=ideax';
         const body = {
             iconKeys: iconKey,
@@ -644,7 +630,7 @@ let ExpWizard = class ExpWizard extends LitElement {
             odsKeys: odsKeys,
             keywords: sector + ' ' + studies,
         };
-        const response = await fetch((apiUrl + qParams), {
+        let response = await fetch((apiUrl + qParams), {
             method: sMethod,
             headers: new Headers({ "Content-Type": "application/json" }),
             body: JSON.stringify(body)
@@ -659,18 +645,25 @@ let ExpWizard = class ExpWizard extends LitElement {
                 }
             }
             else {
-                return Promise.reject(new Error(response.statusText));
+                console.error(response.statusText);
+                return Promise.resolve({});
             }
         })
             .catch((error) => {
-            return Promise.reject(error);
+            console.error(error);
+            return Promise.resolve({});
         });
-        if (response.idea) {
-            this.setIdeaText(response.idea);
-            this.setLogos(response.logos || []);
+        // Mockup
+        if (!(response === null || response === void 0 ? void 0 : response.idea)) {
+            response = { "idea": "Una plataforma que permite a los grupos crear cuentas privadas en las redes sociales y gestionarlas como un grupo. Los equipos de los que forma parte pueden elegir sus propias reglas y restricciones, por lo que es una especie de Slack con una comunidad autocontrolada.", "logos": [{ "icon": { "id": 3141564, "tags": "scale,accounting,balance,inequality,money,business and finance,banking,justice scale", "image": "https://cdn-icons-png.flaticon.com/512/3141/3141564.png", "description": "Economic disparities" }, "brand": { "title": "FaireLaw", "titleFamily": "Comfortaa Bold Alt2", "titleVariant": "700", "taglineFamily": "Raleway", "taglineVariant": "500", "titleColor": "#ffffff", "taglineColor": "#ffffff", "backgroundColor": "#6b6e5a" } }, { "icon": { "id": 6802347, "tags": "social inequality,xenophobia,human rights,no racism,miscellaneous,equality", "image": "https://cdn-icons-png.flaticon.com/512/6802/6802347.png", "description": "Social inequality" }, "brand": { "title": "TruthfulLaw", "titleFamily": "Averta", "titleVariant": "700italic", "taglineFamily": "Raleway", "taglineVariant": "500", "titleColor": "", "taglineColor": "#ffffff", "backgroundColor": "#FFFFFF" } }, { "icon": { "id": 3391631, "tags": "choice,inequality,influencer,subscribe,balance,follow,like,dislike,blogger,social media", "image": "https://cdn-icons-png.flaticon.com/512/3391/3391631.png", "description": "Choice" }, "brand": { "title": "JUSTLAW", "titleFamily": "Montserrat ExtraBold Alt1", "titleVariant": "800", "taglineFamily": "Montserrat", "taglineVariant": "500", "titleColor": "#ffffff", "taglineColor": "#ffffff", "backgroundColor": "#efefef" } }, { "icon": { "id": 2635584, "tags": "ph balance,business and finance,inequality,legal,judge,balanced,law,balance,justice,business", "image": "https://cdn-icons-png.flaticon.com/512/2635/2635584.png", "description": "Balance" }, "brand": { "title": "LAWCITER", "titleFamily": "Phenomena", "titleVariant": "700", "taglineFamily": "Fira Sans Condensed", "taglineVariant": "italic", "titleColor": "", "taglineColor": "#ffffff", "backgroundColor": "#304c82" } }, { "icon": { "id": 2698362, "tags": "weighing scale,inequality,law,balance,scale,laws,scales,business and finance,justice scale,judge,justice", "image": "https://cdn-icons-png.flaticon.com/512/2698/2698362.png", "description": "Balance" }, "brand": { "title": "OPENLAWS", "titleFamily": "Raleway Medium Alt1", "titleVariant": "500", "taglineFamily": "Raleway", "taglineVariant": "600italic", "titleColor": "#ffffff", "taglineColor": "#ffffff", "backgroundColor": "#88c6d1" } }, { "icon": { "id": 1757240, "tags": "law,justice,inequality,justice scale,business and finance,laws,judge,balance", "image": "https://cdn-icons-png.flaticon.com/512/1757/1757240.png", "description": "Balance" }, "brand": { "title": "lawful", "titleFamily": "Brandmark1 Bold", "titleVariant": "700", "taglineFamily": "Montserrat", "taglineVariant": "400", "titleColor": "#b15640", "taglineColor": "#ffffff", "backgroundColor": "#a59b93" } }] };
         }
+        this.setIdeaText(response.idea);
+        this.setLogos(response.logos || []);
     }
     async _refreshForm() {
+        // Clear Results
+        this.setIdeaText("clear");
+        this.setLogos([]);
         // Clear Form
         this._selectedStudies.value = '';
         this._selectedStudies.removeAttribute('invalid');
@@ -680,9 +673,6 @@ let ExpWizard = class ExpWizard extends LitElement {
         this._selectedSector.removeAttribute('invalid');
         this._selectedODS.value = '';
         this._selectedODS.removeAttribute('invalid');
-        // Clear Results
-        this.setIdeaText();
-        this.setLogos([]);
     }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     setLogos(logos) {
@@ -714,14 +704,22 @@ let ExpWizard = class ExpWizard extends LitElement {
         }
     }
     setIdeaText(text) {
-        if (text) {
+        if (text === "clear") {
+            this._areaIdeaText.innerHTML = '';
+        }
+        else if (text === "loading") {
             this._areaIdeaText.innerHTML = `
-        <h2>${this._texts[this.expLang].ideaHeader}</h2>
-        <h3>${text}</h3>
+        <div style="position: relative; padding: 3rem; display: flex;">
+          <bx-loading assistiveText="Loading ..." type="overlay"></bx-loading>
+        </div>
       `;
         }
         else {
-            this._areaIdeaText.innerHTML = '';
+            this._areaIdeaText.innerHTML = `
+        <h2>${this._texts[this.expLang].ideaHeader}</h2>
+        <h3>${text}</h3><br/>
+        <h4>${this._texts[this.expLang].logoHeader}</h4>
+      `;
         }
     }
 };
