@@ -621,7 +621,7 @@ let ExpWizard = class ExpWizard extends LitElement {
         const odsKeys = String(this._variables.keywords.ODS[ods][Math.floor(Math.random() * this._variables.keywords.ODS[ods].length)] || '').toLocaleLowerCase('en');
         const iconKey = String(this._variables.keywords.ICONS[ods][Math.floor(Math.random() * this._variables.keywords.ICONS[ods].length)] || '').toLocaleLowerCase('en');
         const sMethod = "POST";
-        const apiUrl = 'https://apps.explorerbyx.org/api/exec-task'; // window.location.host
+        const apiUrl = 'https://apis-ideax-vjbpvf7lya-uc.a.run.app'; // window.location.host
         const qParams = '?action=new&target=custom&object=ideax';
         const body = {
             iconKeys: iconKey,
