@@ -1,7 +1,7 @@
 var SsoSuSocialButton_1;
 import { __decorate } from "https://cdn.skypack.dev/tslib";
 import { html, css, LitElement, property, customElement } from "https://cdn.skypack.dev/lit-element";
-const API_URL = 'https://sso.universia.net/auth/realms/SantanderX/protocol/openid-connect/auth';
+const API_URL = 'https://sso.santanderx.com/auth/realms/SantanderX/protocol/openid-connect/auth';
 const SUPPORTED_LOCALES = ['es', 'en', 'pt'];
 const DEFAULT_LOCALE = 'es';
 const DEFAULT_BUTTON_LITERALS = {
