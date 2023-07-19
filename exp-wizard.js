@@ -6245,11 +6245,14 @@ let ExpFormIdeaxCreator = class extends s {
         holder: "Selecciona un pa\xEDs",
         validity: "Tienes que seleccionar uno",
         values: [
+          { value: "germany", name: "Alemania" },
           { value: "argentina", name: "Argentina" },
           { value: "brazil", name: "Brasil" },
           { value: "chili", name: "Chile" },
           { value: "spain", name: "Espa\xF1a" },
+          { value: "usa", name: "Estados Unidos" },
           { value: "mexico", name: "M\xE9xico" },
+          { value: "peru", name: "Per\xFA" },
           { value: "portugal", name: "Portugal" },
           { value: "uk", name: "Reino Unido" },
           { value: "uruguay", name: "Uruguay" }
@@ -6264,9 +6267,12 @@ let ExpFormIdeaxCreator = class extends s {
           { value: "argentina", name: "Argentina" },
           { value: "brazil", name: "Brazil" },
           { value: "chili", name: "Chili" },
-          { value: "spain", name: "Spain" },
+          { value: "germany", name: "Germany" },
           { value: "mexico", name: "Mexico" },
+          { value: "peru", name: "Peru" },
           { value: "portugal", name: "Portugal" },
+          { value: "spain", name: "Spain" },
+          { value: "usa", name: "United States" },
           { value: "uk", name: "UK" },
           { value: "uruguay", name: "Uruguay" }
         ]
@@ -6277,11 +6283,14 @@ let ExpFormIdeaxCreator = class extends s {
         holder: "Selecione um pais",
         validity: "Voc\xEA tem que selecionar um",
         values: [
+          { value: "germany", name: "Alemanha" },
           { value: "argentina", name: "Argentina" },
           { value: "brazil", name: "Brasil" },
           { value: "chili", name: "Chile" },
           { value: "spain", name: "Espanha" },
+          { value: "usa", name: "Estados Unidos" },
           { value: "mexico", name: "M\xE9xico" },
+          { value: "peru", name: "Peru" },
           { value: "portugal", name: "Portugal" },
           { value: "uk", name: "Reino Unido" },
           { value: "uruguay", name: "Uruguai" }
